@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/master" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <section layout:fragment="content">
+        <h1>Homepage</h1>
+        <div  sec:authorize="!isAuthenticated()">
+            <p>
+                Vítejte v aplikaci UserChange. Pokud chcete aplikaci začít používat, tak se musíte nejprve
+                <a href="/signin" th:href="@{/login}">přihlásit</a>.
+            </p>
+        </div>
+        <p>
+            Aplikace slouží k...
+        </p>
+    </section>
+</body>
+</html>
