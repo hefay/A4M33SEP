@@ -20,3 +20,23 @@ table.client td:nth-of-type(1) {
 table.client td:nth-of-type(2) {
     width: 250px;
 }
+
+.item {
+    font-style: italic;
+    font-size: 120%;
+    line-height: 150%;
+    margin-top: 7px;
+}
+
+.item .title {
+    display: inline-block;
+    width: 220px;
+    font-style: normal;
+    font-weight: bold;
+
+}
+
+.request-control {
+    position: relative;
+    top: 20px;
+}

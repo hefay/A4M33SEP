@@ -3,9 +3,12 @@ package cz.cvut.sep.vorislu1.service;
 import cz.cvut.sep.service.customer.CustomerDatabaseWSDL;
 import cz.cvut.sep.service.customer.CustomerDetailType;
 import cz.cvut.sep.service.customer.CustomerType;
+import cz.cvut.sep.vorislu1.mapper.ModelMapper;
+import cz.cvut.sep.vorislu1.model.Address;
 import cz.cvut.sep.vorislu1.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import javax.xml.ws.Holder;
 import java.math.BigInteger;
@@ -53,8 +56,11 @@ public class ClientServiceImpl implements ClientService {
         Holder<CustomerDetailType> detailHolder = new Holder<>();
 
         cd.readCustomerDetails(idHolder, statusHolder, detailHolder);
-        Client client = new Client();
+        if(detailHolder.value == null || statusHolder.value == null || idHolder.value == null) {
+            return null;
+        }
 
+        Client client = ModelMapper.client(id, statusHolder.value, detailHolder.value);
         return client;
     }
 

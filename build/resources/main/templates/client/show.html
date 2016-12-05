@@ -7,9 +7,79 @@
 </head>
 <body>
     <section layout:fragment="content">
-        <h1>Client Detail</h1>
-        <p th:text="${client.firstName}"></p>
-        <p th:text="${client.lastName}"></p>
+        <h1 th:inline="text">Informace o [[${client.firstName}]] [[${client.lastName}]]</h1>
+        <div class="item">
+            <div class="title">Celým jménem: </div>
+            <div th:each="name : ${client.firstNames}" th:remove="tag"><span th:text="${name}" th:remove="tag">name</span></div>
+            <div th:each="name : ${client.lastNames}" th:remove="tag"><span th:text="${name}" th:remove="tag">name</span></div>
+        </div>
+        <div class="item">
+            <div class="title">Rodné číslo: </div>
+            <span th:text="${client.personalNumber}" th:remove="tag">name</span>
+        </div>
+        <div class="item">
+            <div class="title">Země původu: </div>
+            <span th:text="${client.originCountry}" th:remove="tag">name</span>
+        </div>
+        <div class="item">
+            <div class="title">Stav: </div>
+            <span th:text="${client.state}" th:remove="tag">name</span>
+        </div>
+
+        <h2>Kontaktní údaje</h2>
+        <h3>Telefon</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Typ čísla</th>
+                    <th>Kód města</th>
+                    <th>Kód země</th>
+                    <th>Číslo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="phone : ${client.phones}">
+                    <th:block th:switch="${phone.type}">
+                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).WORK}">Práce</td>
+                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).HOME}">Domácí</td>
+                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).MOBILE}">Mobilní</td>
+                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).FAX}">FAX</td>
+                        <td th:case="*">Neznámý</td>
+                    </th:block>
+                    <td th:text="${phone.cityCode}"></td>
+                    <td th:text="${phone.countryCode}"></td>
+                    <td th:text="${phone.phoneNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Adresa</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Ulice</th>
+                <th>Město</th>
+                <th>Země</th>
+                <th>Region</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="address : ${client.addresses}">
+                <td>
+                    <span th:remove="tag" th:text="${address.streetName}"></span>
+                    <span th:remove="tag" th:text="${address.streetNumber}"></span>
+                </td>
+                <td><span th:remove="tag" th:text="${address.zipCode}"></span>, <span th:remove="tag" th:text="${address.city}"></span> - <span th:remove="tag" th:text="${address.cityPart}"></span></td>
+                <td th:text="${address.country}"></td>
+                <td th:text="${address.region}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="pull-right">
+            <a th:href="@{/change-request/new(clientId = ${client.id})}" class="btn btn-primary">Vytvořit změnovou žádost</a>
+        </div>
+
     </section>
 </body>
 </html>

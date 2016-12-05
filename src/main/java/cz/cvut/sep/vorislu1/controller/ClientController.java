@@ -8,11 +8,12 @@ import cz.cvut.sep.vorislu1.service.ClientService;
 import groovy.util.logging.Slf4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 import javax.xml.ws.Holder;
 import java.math.BigInteger;
@@ -37,8 +38,22 @@ public class ClientController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String index(Model model, @PathVariable String id) {
         Client client = clientService.find(new BigInteger(id));
+        if(client == null) {
+            throw new MissingClientException();
+        }
         model.addAttribute("client", client);
         return "client/show";
     }
+
+    @ExceptionHandler(MissingClientException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String missingClient() {
+        return "client/missing-client";
+    }
+
+    class MissingClientException extends RuntimeException {
+
+    }
+
 
 }
