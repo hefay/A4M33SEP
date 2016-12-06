@@ -1,19 +1,39 @@
 package cz.cvut.sep.vorislu1.model;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Vorisek Lukas <lukasvorisek@gmail.com>
  */
 public class Client {
+    public enum State {
+        ACTIVE("Active"), IN_CHANGE("InChange"), SUSPENDED("Suspended"), REFUNDED("Refunded"), DEACTIVED("Deactivated");
+
+        private final String text;
+
+        State(String text) {
+            this.text = text;
+        }
+
+        public String val() {
+            return text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
     private BigInteger id;
     private String firstName;
-    private List<String> firstNames;
+    private List<String> firstNames = new ArrayList<>();
     private String lastName;
-    private List<String> lastNames;
-    private List<Address> addresses;
-    private List<Phone> phones;
+    private List<String> lastNames = new ArrayList<>();
+    private List<Address> addresses  = new ArrayList<>();
+    private List<Phone> phones  = new ArrayList<>();
     private String originCountry;
     private String personalNumber;
     private String state;

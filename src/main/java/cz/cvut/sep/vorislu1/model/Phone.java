@@ -4,7 +4,7 @@ package cz.cvut.sep.vorislu1.model;
  * @author Vorisek Lukas <lukasvorisek@gmail.com>
  */
 public class Phone {
-    public enum PhoneType {HOME, WORK, MOBILE, FAX}
+    public enum PhoneType {MOBILE, FIX}
     private PhoneType type;
     private String phoneNumber;
     private String cityCode;

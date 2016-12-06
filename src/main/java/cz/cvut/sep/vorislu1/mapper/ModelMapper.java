@@ -81,13 +81,9 @@ public class ModelMapper {
         }
         switch (phoneType.intValue()) {
             case 1:
-                return Phone.PhoneType.FAX;
-            case 2:
-                return Phone.PhoneType.HOME;
-            case 3:
                 return Phone.PhoneType.MOBILE;
-            case 4:
-                return Phone.PhoneType.WORK;
+            case 2:
+                return Phone.PhoneType.FIX;
             default:
                 return null;
         }
