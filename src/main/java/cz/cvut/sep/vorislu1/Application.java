@@ -2,6 +2,7 @@ package cz.cvut.sep.vorislu1;
 
 import cz.cvut.sep.service.customer.CustomerDatabase;
 import cz.cvut.sep.service.customer.CustomerDatabaseWSDL;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,6 +17,9 @@ import java.net.URL;
 @SpringBootApplication
 public class Application {
 
+    @Value("${customer-database.wsdl}")
+    private String customerDatabaseWsdlUrl;
+
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
         String[] beans = ctx.getBeanDefinitionNames();
@@ -26,7 +30,7 @@ public class Application {
 
     @Bean
     public CustomerDatabase customerDatabaseInternal() throws MalformedURLException {
-        URL url = new URL("http://Helios:8088/mockCustomerDatabaseSOAP?wsdl");
+        URL url = new URL(customerDatabaseWsdlUrl);
         return new CustomerDatabase(url);
     }
 

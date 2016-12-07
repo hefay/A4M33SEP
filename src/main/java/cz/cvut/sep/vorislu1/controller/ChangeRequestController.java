@@ -3,6 +3,7 @@ package cz.cvut.sep.vorislu1.controller;
 import cz.cvut.sep.vorislu1.formmodel.ChangeRequestForm;
 import cz.cvut.sep.vorislu1.model.*;
 import cz.cvut.sep.vorislu1.repository.ChangeRequestRepository;
+import cz.cvut.sep.vorislu1.service.ChangeRequestService;
 import cz.cvut.sep.vorislu1.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,14 @@ public class ChangeRequestController {
     ClientService clientService;
     @Autowired
     ChangeRequestRepository changeRequestRepository;
+    @Autowired
+    ChangeRequestService changeRequestService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model) {
+        List<ChangeRequest> requests = changeRequestService.getAll();
+        model.addAttribute("requests", requests);
+
         return "change-request/index";
     }
 

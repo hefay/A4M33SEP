@@ -21,6 +21,8 @@ public class Change {
     @JoinColumn(name = "request_id", nullable = false)
     private ChangeRequest request;
 
+    public Change(){}
+
     public Change(Class type, String name, Object from, Object to) {
         this.type = type;
         this.from = from == null ? null : from.toString();

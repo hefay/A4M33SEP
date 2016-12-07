@@ -25,6 +25,10 @@ public class ChangeRequest {
     private List<Change> changes;
     private String type;
 
+    public ChangeRequest() {
+
+    }
+
     public ChangeRequest(Long clientId, Long userId) {
         this.clientId = clientId;
         this.userId = userId;
@@ -50,6 +54,18 @@ public class ChangeRequest {
         ch.setRequest(null);
         changes.remove(ch);
         return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Date getChangeDate() {
+        return changeDate;
+    }
+
+    public List<Change> getChanges() {
+        return changes;
     }
 
     public String getType() {

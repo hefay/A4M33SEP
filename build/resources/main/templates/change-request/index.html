@@ -8,6 +8,27 @@
 <body>
     <section layout:fragment="content">
         <h1>Change Request List</h1>
+        <th:block th:if="${!requests.isEmpty()}">
+            <table class="table table-striped client">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Datum</th>
+                    <th>Typ</th>
+                    <th>Data</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="request : ${requests}">
+                        <td th:text="${request.id}"></td>
+                        <td th:text="${#dates.format(request.changeDate, 'dd. MM. yyyy HH:mm')}"></td>
+                        <td th:text="${request.type}"></td>
+                        <td th:text="${request.changes}"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </th:block>
     </section>
 </body>
 </html>
