@@ -44,11 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-    }
-
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new UserDetailsService() {

@@ -8,7 +8,7 @@
 <body>
     <section layout:fragment="content">
         <h1>Change Request New</h1>
-        <form class="form-horizontal" th:action="@{/change-request/aaa}" method="post" th:object="${client}">
+        <form class="form-horizontal" th:action="@{/change-request/{id}(id=${client.id})}" method="post" th:object="${client}">
             <div class="col-sm-6">
                 <fieldset>
                     <legend>Osobní údaje</legend>
