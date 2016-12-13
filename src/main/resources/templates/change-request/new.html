@@ -50,10 +50,10 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Typ</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" th:name="|phone[${i.index}].type|">
+                                    <select class="form-control" th:name="|phones[${i.index}].type|">
                                         <option></option>
-                                        <option th:selected="${phone.type == T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).MOBILE}" value="1">Mobil</option>
-                                        <option th:selected="${phone.type == T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).FIX}" value="2">Pevná</option>
+                                        <option th:selected="1" value="1">Mobil</option>
+                                        <option th:selected="2" value="2">Pevná</option>
                                     </select>
                                 </div>
                             </div>

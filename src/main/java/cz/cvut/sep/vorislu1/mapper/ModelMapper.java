@@ -4,6 +4,7 @@ import cz.cvut.sep.service.customer.AddressType;
 import cz.cvut.sep.service.customer.CustomerDetailType;
 import cz.cvut.sep.service.customer.PhoneType;
 import cz.cvut.sep.vorislu1.model.Address;
+import cz.cvut.sep.vorislu1.model.ChangeRequest;
 import cz.cvut.sep.vorislu1.model.Client;
 import cz.cvut.sep.vorislu1.model.Phone;
 
@@ -42,7 +43,7 @@ public class ModelMapper {
         phone.setCityCode(phoneType.getCityCode());
         phone.setCountryCode(phoneType.getCityCode());
         phone.setPhoneNumber(phoneType.getPhoneNum());
-        phone.setType(phoneType(phoneType.getPhoneNumberType()));
+        phone.setType(phoneType.getPhoneNumberType().intValue());
 
         return phone;
     }
@@ -89,4 +90,5 @@ public class ModelMapper {
         }
 
     }
+
 }

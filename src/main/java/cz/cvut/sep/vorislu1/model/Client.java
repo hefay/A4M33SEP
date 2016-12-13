@@ -117,4 +117,11 @@ public class Client {
     public void setLastNames(List<String> lastNames) {
         this.lastNames = lastNames;
     }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+    }
+    public void addPhone(Phone phone) {
+        phones.add(phone);
+    }
 }

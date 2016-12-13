@@ -7,7 +7,24 @@
 </head>
 <body>
     <section layout:fragment="content">
-        <h1>Change Request Detail</h1>
+        <h1>Change Request #<th:block th:text="${request.id}"></th:block></h1>
+        <table class="table table-bordered">
+            <caption th:utext="#{change.change_table}"></caption>
+            <thead>
+                <tr>
+                    <th>Údaj</th>
+                    <th>Z</th>
+                    <th>Na</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="change : ${request.changes}">
+                    <td th:utext="#{${change.name}}"></td>
+                    <td th:text="${change.from}">Z</td>
+                    <td th:text="${change.to}">Na</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 </body>
 </html>

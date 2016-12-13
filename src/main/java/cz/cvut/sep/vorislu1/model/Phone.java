@@ -5,16 +5,16 @@ package cz.cvut.sep.vorislu1.model;
  */
 public class Phone {
     public enum PhoneType {MOBILE, FIX}
-    private PhoneType type;
+    private Integer type;
     private String phoneNumber;
     private String cityCode;
     private String countryCode;
 
-    public PhoneType getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(PhoneType type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

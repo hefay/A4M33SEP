@@ -1,0 +1,54 @@
+change.change_table = Tabulka zmeny
+
+originCountry = Země původu
+personalNumber = Rodné číslo
+
+addresses[0].streetName = Adresa 1 - Ulice
+addresses[0].streetNumber = Adresa 1 - Číslo popisné
+addresses[0].zipCode = Adresa 1 - PSČ
+addresses[0].city = Adresa 1 - Město
+addresses[0].cityPart = Adresa 1 - Městská část
+addresses[0].country = Adresa 1 - Země
+addresses[0].region = Adresa 1 - Region
+addresses[1].streetName = Adresa 2 - Ulice
+addresses[1].streetNumber = Adresa 2 - Číslo popisné
+addresses[1].zipCode = Adresa 2 - PSČ
+addresses[1].city = Adresa 2 - Město
+addresses[1].cityPart = Adresa 2 - Městská část
+addresses[1].country = Adresa 2 - Země
+addresses[1].region = Adresa 2 - Region
+addresses[2].streetName = Adresa 3 - Ulice
+addresses[2].streetNumber = Adresa 3 - Číslo popisné
+addresses[2].zipCode = Adresa 3 - PSČ
+addresses[2].city = Adresa 3 - Město
+addresses[2].cityPart = Adresa 3 - Městská část
+addresses[2].country = Adresa 3 - Země
+addresses[2].region = Adresa 3 - Region
+
+phones[0].phoneNumber = Telefon 1 - Číslo
+phones[0].cityCode = Telefon 1 - Kód města
+phones[0].countryCode = Telefon 1 - Kód státu
+phones[0].type = Telefon 1 - Typ
+phones[1].phoneNumber = Telefon 2 - Číslo
+phones[1].cityCode = Telefon 2 - Kód města
+phones[1].countryCode = Telefon 2 - Kód státu
+phones[1].type = Telefon 2 - Typ
+phones[2].phoneNumber = Telefon 3 - Číslo
+phones[2].cityCode = Telefon 3 - Kód města
+phones[2].countryCode = Telefon 3 - Kód státu
+phones[2].type = Telefon 3 - Typ
+
+
+firstNames[0] = Jméno 1
+firstNames[1] = Jméno 2
+firstNames[2] = Jméno 3
+firstNames[3] = Jméno 4
+firstNames[4] = Jméno 5
+
+lastNames[0] = Přijmení 1
+lastNames[1] = Přijmení 2
+lastNames[2] = Přijmení 3
+lastNames[3] = Přijmení 4
+lastNames[4] = Přijmení 5
+
+

@@ -40,8 +40,8 @@
             <tbody>
                 <tr th:each="phone : ${client.phones}">
                     <th:block th:switch="${phone.type}">
-                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).FIX}">Domácí</td>
-                        <td th:case="${T(cz.cvut.sep.vorislu1.model.Phone.PhoneType).MOBILE}">Mobilní</td>
+                        <td th:case="2">Domácí</td>
+                        <td th:case="1">Mobilní</td>
                         <td th:case="*">Neznámý</td>
                     </th:block>
                     <td th:text="${phone.cityCode}"></td>

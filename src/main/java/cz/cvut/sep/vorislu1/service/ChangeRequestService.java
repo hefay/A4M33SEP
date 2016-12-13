@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface ChangeRequestService {
     public List<ChangeRequest> getAll();
+    public ChangeRequest find(long id);
+    public void delete(long id);
 }

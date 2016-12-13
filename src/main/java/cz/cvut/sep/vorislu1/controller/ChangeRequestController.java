@@ -37,8 +37,17 @@ public class ChangeRequestController {
         return "change-request/index";
     }
 
+    @RequestMapping(value = "/{id}/delete")
+    public String delete(@PathVariable long id) {
+        changeRequestService.delete(id);
+        return "redirect:/change-request";
+    }
+
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
-    public String show(@PathVariable long id) {
+    public String show(@PathVariable long id, Model model) {
+        ChangeRequest request = changeRequestService.find(id);
+
+        model.addAttribute("request", request);
         return "change-request/show";
     }
 
@@ -58,14 +67,16 @@ public class ChangeRequestController {
 
         for(int i = 0; i < 5; i++) {
             String fnn = chrf.getFirstNames().size() > i ? chrf.getFirstNames().get(i) : null;
-            String fno = oldClient.getFirstNames().size() > i ? oldClient.getLastNames().get(i) : null;
-            String lnn = chrf.getFirstNames().size() > i ? chrf.getFirstNames().get(i) : null;
-            String lno = oldClient.getFirstNames().size() > i ? oldClient.getLastNames().get(i) : null;
+            String fno = oldClient.getFirstNames().size() > i ? oldClient.getFirstNames().get(i) : "";
+            String lnn = chrf.getLastNames().size() > i ? chrf.getLastNames().get(i) : null;
+            String lno = oldClient.getLastNames().size() > i ? oldClient.getLastNames().get(i) : "";
             if(fnn != null && !fnn.equals(fno)) {
                 Change ch = new Change(String.class, "firstNames[" + i + "]", fno, fnn);
+                chr.addChange(ch);
             }
-            if(lnn != null && !lnn.equals(fno)) {
+            if(lnn != null && !lnn.equals(lno)) {
                 Change ch = new Change(String.class, "lastNames[" + i + "]", lno, lnn);
+                chr.addChange(ch);
             }
         }
 
@@ -101,6 +112,50 @@ public class ChangeRequestController {
 
         return "redirect:/change-request";
     }
+
+    @RequestMapping(method = {RequestMethod.POST})
+    public String create(@ModelAttribute Client chrf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        ChangeRequest chr = new ChangeRequest(null, null);
+
+        for(int i = 0; i < 5; i++) {
+            if(!chrf.getFirstNames().get(i).isEmpty()) {
+                Change c = new Change(String.class, "firstNames[" + i + "]");
+                c.setTo(chrf.getFirstNames().get(i));
+                chr.addChange(c);
+            }
+            if(!chrf.getLastNames().get(i).isEmpty()) {
+                Change c = new Change(String.class, "lastNames[" + i + "]");
+                c.setTo(chrf.getLastNames().get(i));
+                chr.addChange(c);
+            }
+        }
+
+        for(int i = 0; i < 3; i++) {
+            CompareAndSet<Address> cmpAddress = new CompareAndSet<>(chrf.getAddresses().get(i), null, chr, "addresses[" + i + "].");
+            CompareAndSet<Phone> cmpPhone = new CompareAndSet<>(chrf.getPhones().get(i), null, chr, "phones[" + i + "].");
+
+            cmpAddress
+                    .compareAndSet("streetName")
+                    .compareAndSet("streetNumber")
+                    .compareAndSet("zipCode")
+                    .compareAndSet("city")
+                    .compareAndSet("cityPart")
+                    .compareAndSet("country")
+                    .compareAndSet("region");
+            cmpPhone
+                    .compareAndSet("type")
+                    .compareAndSet("phoneNumber")
+                    .compareAndSet("cityCode")
+                    .compareAndSet("countryCode");
+        }
+
+
+        chr.setType(ChangeRequest.NEW);
+        changeRequestRepository.save(chr);
+
+        return "redirect:/change-request";
+    }
+
 
     private class CompareAndSet<T> {
         private T a;
@@ -138,6 +193,7 @@ public class ChangeRequestController {
                 Change ch = new Change(ra.getClass(), chName, null, ra);
                 System.out.println("Add change " + ch.toString() + " for " + attribute);
                 chr.addChange(ch);
+                return this;
             }
             Object rb = gmeth.invoke(b);
 

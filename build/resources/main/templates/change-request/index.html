@@ -15,7 +15,7 @@
                     <th>ID</th>
                     <th>Datum</th>
                     <th>Typ</th>
-                    <th>Data</th>
+                    <th>Akce</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,9 +23,15 @@
                         <td th:text="${request.id}"></td>
                         <td th:text="${#dates.format(request.changeDate, 'dd. MM. yyyy HH:mm')}"></td>
                         <td th:text="${request.type}"></td>
-                        <td th:text="${request.changes}"></td>
+                        <td>
+                            <a class="btn btn-default btn-sm" th:href="@{/change-request/{id}(id=${request.id})}">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Zobrazit
+                            </a>
+                            <a class="btn btn-default btn-sm" th:href="@{/change-request/{id}/delete(id=${request.id})}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Odstranit
+                            </a>
+                        </td>
                     </tr>
-
                 </tbody>
             </table>
         </th:block>

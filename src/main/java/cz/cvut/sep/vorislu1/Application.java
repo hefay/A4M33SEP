@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,5 +39,12 @@ public class Application {
     @Bean
     public CustomerDatabaseWSDL customerDatabase(CustomerDatabase cd) {
         return cd.getCustomerDatabaseSOAP();
+    }
+
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+        rb.addBasenames("locale\\messages");
+        return rb;
     }
 }
