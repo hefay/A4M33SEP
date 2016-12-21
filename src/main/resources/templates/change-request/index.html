@@ -15,6 +15,7 @@
                     <th>ID</th>
                     <th>Datum</th>
                     <th>Typ</th>
+                    <th>Synchronizováno</th>
                     <th>Akce</th>
                 </tr>
                 </thead>
@@ -23,12 +24,16 @@
                         <td th:text="${request.id}"></td>
                         <td th:text="${#dates.format(request.changeDate, 'dd. MM. yyyy HH:mm')}"></td>
                         <td th:text="${request.type}"></td>
+                        <td th:text="${request.sync}"></td>
                         <td>
                             <a class="btn btn-default btn-sm" th:href="@{/change-request/{id}(id=${request.id})}">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Zobrazit
                             </a>
                             <a class="btn btn-default btn-sm" th:href="@{/change-request/{id}/delete(id=${request.id})}">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Odstranit
+                            </a>
+                            <a class="btn btn-default btn-sm" th:href="@{/change-request/{id}/sync(id=${request.id})}">
+                                <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Synchronizovat
                             </a>
                         </td>
                     </tr>

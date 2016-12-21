@@ -75,4 +75,12 @@ public class ChangeRequest {
     public void setType(String type) {
         this.type = type;
     }
+
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public boolean isSync() {
+        return sync;
+    }
 }

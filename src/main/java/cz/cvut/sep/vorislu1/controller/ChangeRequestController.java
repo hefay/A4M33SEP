@@ -43,6 +43,13 @@ public class ChangeRequestController {
         return "redirect:/change-request";
     }
 
+    @RequestMapping(value = "/{id}/sync")
+    public String sync(@PathVariable long id) {
+        ChangeRequest cr = changeRequestService.find(id);
+        changeRequestService.push(cr);
+        return "redirect:/change-request";
+    }
+
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
     public String show(@PathVariable long id, Model model) {
         ChangeRequest request = changeRequestService.find(id);
@@ -116,6 +123,11 @@ public class ChangeRequestController {
     @RequestMapping(method = {RequestMethod.POST})
     public String create(@ModelAttribute Client chrf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         ChangeRequest chr = new ChangeRequest(null, null);
+
+        CompareAndSet<Client> cmpUser = new CompareAndSet<>(chrf, null, chr);
+        cmpUser
+                .compareAndSet("originCountry")
+                .compareAndSet("personalNumber");
 
         for(int i = 0; i < 5; i++) {
             if(!chrf.getFirstNames().get(i).isEmpty()) {
